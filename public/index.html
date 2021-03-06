@@ -45,6 +45,7 @@
             </li>
           </ul>
           <form class="d-flex">
+            <!-- Fast search to cards on scryfall. -->
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search-card-txt">
             <button class="btn btn-outline-success" type="submit" id="search-card-btn">Search</button>
           </form>
@@ -75,23 +76,34 @@
 			  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 			  crossorigin="anonymous"></script>
     <script type="text/javascript">
+    // When the document is ready and all objects are rendered.
     $(document).ready(function () {
+      // Add a click event handler to button.
       $("#search-card-btn").on('click', function (e) {
         e.preventDefault();
+        // Build the resource to retreive.
         let cardName = $("#search-card-txt").val();
-        let cardUrl = "http://localhost:8080/card/" + cardName;
+        let cardUrl = "http://localhost:8080/card";
+        // Make an ajax get call to retreive info from server.
         $.ajax({
           method: "GET",
           url: cardUrl,
-          dataType: "html"
-        }).done(function (data) {
-          console.log("Success");
-          $("#card-images").html(data);
-        }).fail(function (data) {
+          dataType: "html",
+          data: {
+            name: cardName
+          }
+        }).done(function (data) { // Catch a successfull return value.
+          $("#card-images").html("");
+          let res = JSON.parse(data);
+          for (let i = 0; i < res.cards.length; i++) {
+            console.log(res.cards[i]);
+            let li = $("<li>").html(res.cards[i]);
+            $("#card-images").append(li);
+          }
+        }).fail(function (data) { // Catch a unsuccessfull return value.
           console.log("Error: " + data);
           $("#card-images").html("Error found.");
-        }).always(function () {
-          console.log("Always");
+        }).always(function () { // Enter on any return.
         });
       });
     });

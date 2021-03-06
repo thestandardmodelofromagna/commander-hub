@@ -12,26 +12,32 @@ app.get('/', function (req, res) { // At <url>/
 
 /*
  * GET: Given a name, fetch scryfall to get all cards named.
+ * Use :name to access to request params.
  */
-app.get('/card/:name', function (req, res) {
+app.get('/card', function (req, res) {
     // Call py script.
     // Generate data.
-    let name = req.params.name;
-    let card = 'one card: ' + name;
-    console.log("Called card with name: " + name);
+    let name = req.query.name;
+    let cards = {
+        "cards": [name, "another", "another one"]
+    };
+    console.log("Called card with name: " + cards);
     // Send data.
-    res.send(card);
+    res.send(cards);
 });
 
 /*
  * POST: Create a resource from server.
  */
+// app.post('/card')
 /*
  * PUT: Update a resource from server.
  */
+// app.put('/card')
 /*
  * DELETE: Delete a resource from server.
  */
+// app.delete('/card')
 
 app.listen(8080, function() {
     console.log("I'm ready");
