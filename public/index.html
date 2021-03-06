@@ -45,8 +45,8 @@
             </li>
           </ul>
           <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search-card-txt">
+            <button class="btn btn-outline-success" type="submit" id="search-card-btn">Search</button>
           </form>
         </div>
       </div>
@@ -62,9 +62,39 @@
         <div class="col-sm-1"></div>
       </div>
     </div>
-    
+    <div class="container">
+      <div class="row">
+        <div class="col" id="card-images"></div>
+      </div>
+    </div>
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <script
+			  src="https://code.jquery.com/jquery-3.6.0.min.js"
+			  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+			  crossorigin="anonymous"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+      $("#search-card-btn").on('click', function (e) {
+        e.preventDefault();
+        let cardName = $("#search-card-txt").val();
+        let cardUrl = "http://localhost:8080/card/" + cardName;
+        $.ajax({
+          method: "GET",
+          url: cardUrl,
+          dataType: "html"
+        }).done(function (data) {
+          console.log("Success");
+          $("#card-images").html(data);
+        }).fail(function (data) {
+          console.log("Error: " + data);
+          $("#card-images").html("Error found.");
+        }).always(function () {
+          console.log("Always");
+        });
+      });
+    });
+    </script>
   </body>
 </html>
