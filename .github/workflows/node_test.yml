@@ -41,7 +41,12 @@ jobs:
 
       - name: Test project
         run: npm test
+  
+  deploy_messages:
+    needs: build
+    runs-on: ubuntu-latest
 
+    steps:
       - name: Discord notification
         uses: Ilshidur/action-discord@master
         env:
