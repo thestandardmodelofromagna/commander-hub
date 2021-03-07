@@ -1,0 +1,20 @@
+### Port already in use
+
+Error: listen EADDRINUSE: address already in use :::8080
+
+1. Search for any tcp listen port on your system with the command `sudo lsof -i -P -n | grep LISTEN`. It will output:
+```
+COMMAND     PID            USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
+systemd-r  1233 systemd-resolve   13u  IPv4  35712      0t0  TCP x.x.x.x:53 (LISTEN)
+cupsd      1365            root    6u  IPv6  46254      0t0  TCP [::1]:631 (LISTEN)
+cupsd      1365            root    7u  IPv4  46255      0t0  TCP 127.0.0.1:631 (LISTEN)
+node      59195              ap   19u  IPv6 206682      0t0  TCP *:8080 (LISTEN)
+```
+The port `node 59195 ap 19u IPv6 206682 0t0 TCP *:8080 (LISTEN)` is the one that have to be killed.
+
+2. With `ps aux | grep node` you can find the process to kill:
+```
+ap         59195  0.0  0.2 605464 38844 pts/0    Tl   17:27   0:00 /snap/../node index.js
+```
+
+3. Kill the program with `kill -9 59195`. 59195 is the PID of the process.
