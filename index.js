@@ -1,46 +1,33 @@
-const express = require('express'); // Require api calls library.
+// Require api calls library.
+const express = require('express');
+const { spawn } = require('child_process');
 
-let app = express(); // Create base entrypoint.
+// Create base entrypoint.
+let app = express();
 
-/*
- * GET: Get a resource from server.
- */
-app.get('/', function (req, res) { // At <url>/
-    // res.send('Hello World!'); // Client get Hello World string.
+app.get('/', function (req, res) {
     res.sendFile(`${__dirname}/public/index.html`);
 });
 
-/*
- * GET: Given a name, fetch scryfall to get all cards named.
- * Use :name to access to request params.
- */
 app.get('/card', function (req, res) {
-    // Call py script.
-    // Generate data.
-    let name = req.query.name;
-    let cards = {
-        "cards": [name, "another", "another one"]
-    };
-    console.log("Called card with name: " + cards);
-    // Send data.
-    res.send(cards);
+    let buffer;
+    let pythonPath = `${__dirname}/python/mtgedhweb.py`;
+
+    // Spawn new child process to call the python script.
+    const python = spawn('python', [pythonPath, req.query.name]);
+
+    // Collect data from script.
+    python.stdout.on('data', function (data) {
+        buffer = data;
+    });
+    // In close event we are sure that stream from child process is closed.
+    python.on('close', function (code) {
+        res.send(buffer)
+    });
 });
 
-/*
- * POST: Create a resource from server.
- */
-// app.post('/card')
-/*
- * PUT: Update a resource from server.
- */
-// app.put('/card')
-/*
- * DELETE: Delete a resource from server.
- */
-// app.delete('/card')
-
-app.listen(8080, function() {
-    console.log("I'm ready");
+app.listen(8080, function () {
+    console.log("Server ready to accept requests");
 });
 
 // Setup a catch-all point.
@@ -52,7 +39,10 @@ app.get('*', (req, res) => res.status(404).send({
 app.use(function (err, req, res, next) {
     console.error("Last error handler.");
     console.error(err.message);
-    if(!err.statusCode) err.statusCode = 500;
+
+    if (!err.statusCode)
+        err.statusCode = 500;
+
     res.status(err.statusCode).send(err.message);
 });
 
