@@ -12,15 +12,18 @@
     "url": "git+https://github.com/thestandardmodelofromagna/commander-hub.git"
   },
   "author": "thestandardmodelofromagna",
-  "license": "ISC",
+  "license": "GNU",
   "bugs": {
     "url": "https://github.com/thestandardmodelofromagna/commander-hub/issues"
   },
   "homepage": "https://github.com/thestandardmodelofromagna/commander-hub#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "chai": "^4.3.3",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "mongoose": "^5.11.19"
+    "mocha": "^8.3.1",
+    "mongoose": "^5.11.19",
+    "supertest": "^6.1.3"
   }
 }
