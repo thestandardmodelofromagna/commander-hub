@@ -14,7 +14,7 @@ app.get('/card', function (req, res) {
     let pythonPath = `${__dirname}/python/mtgedhweb.py`;
 
     // Spawn new child process to call the python script.
-    const python = spawn('python', [pythonPath, req.query.name]);
+    const python = spawn('python3', [pythonPath, req.query.name]);
 
     // Collect data from script.
     python.stdout.on('data', function (data) {
