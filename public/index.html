@@ -102,6 +102,9 @@
         </script>
 
     <script type="text/javascript">
+        // Declare base_url.
+        const base_url = window.location.origin;
+
         // When the document is ready and all objects are rendered.
         $(document).ready(function () {
             /*var tooltipList = $('[data-bs-toggle="tooltip"]').map(tooltipTriggerEl => {
@@ -117,7 +120,7 @@
 
                 // Build the resource to retreive.
                 let cardName = $("#search-card-txt").val();
-                let cardUrl = "http://localhost:8080/cards";
+                let cardUrl = `${base_url}/cards`;
 
                 // Make an ajax get call to retreive info from server.
                 $.ajax({
