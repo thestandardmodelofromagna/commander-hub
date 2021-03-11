@@ -25,7 +25,8 @@ app.get('/', function (req, res) {
 const port = process.env.PORT || 8080;
 
 app.listen(port, function () {
-    console.log(`Server ready to accept requestson http://localhost:${port}`);
+    console.log(`You are in ${process.env.NODE_ENV} environment.`);
+    console.log(`Server ready to accept requests on http://localhost:${port}`);
 });
 
 // Setup a catch-all point.

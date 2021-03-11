@@ -29,6 +29,11 @@ module.exports = (req, res) => {
         buffer = data;
     });
 
+    // Re-log errors from python script.
+    python.stderr.on('data', data => {
+        console.error("Error from python: ", data.toString());
+    })
+
     // In close event we are sure that stream from child process is closed.
     python.on('close', code => {
         console.log(`Result code: ${pythonPath} ${req.query.name} ${code}`);

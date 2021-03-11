@@ -45,10 +45,15 @@ jobs:
 
       - name: Test project
         run: npm test
-        
+  
+  deploy_messages:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
       - name: Discord notification
         uses: Ilshidur/action-discord@master
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         with:
-          args: 'A $GITHUB_EVENT_NAME on $GITHUB_REF has ran $GITHUB_ACTION. The project {{ EVENT_PAYLOAD.repository.full_name }} has been deployed without errors.'
+          args: 'A {{ GITHUB_EVENT_NAME }} on {{ GITHUB_REF }} has ran {{ GITHUB_ACTION }}. The project {{ EVENT_PAYLOAD.repository.full_name }} has been deployed without errors.'
