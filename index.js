@@ -1,33 +1,31 @@
+/**
+ * Main js script.
+ * 
+ * @summary Use this file to set the initial app configuration.
+ * 
+ * @author Andrea Nicoletti, Daniele Tentoni.
+ * @since 1.0.0
+ */
+
 // Require api calls library.
 const express = require('express');
-const { spawn } = require('child_process');
+const cardRoute = require('./routes/cardRoute');
 
 // Create base entrypoint.
-let app = express();
+const app = express();
+app.use(express.json());
+cardRoute(app);
 
 app.get('/', function (req, res) {
     res.sendFile(`${__dirname}/public/index.html`);
 });
 
-app.get('/card', function (req, res) {
-    let buffer;
-    let pythonPath = `${__dirname}/python/mtgedhweb.py`;
+// Card endpoint moved to card route script.
 
-    // Spawn new child process to call the python script.
-    const python = spawn('python3', [pythonPath, req.query.name]);
+const port = process.env.PORT || 8080;
 
-    // Collect data from script.
-    python.stdout.on('data', function (data) {
-        buffer = data;
-    });
-    // In close event we are sure that stream from child process is closed.
-    python.on('close', function (code) {
-        res.send(buffer)
-    });
-});
-
-app.listen(8080, function () {
-    console.log("Server ready to accept requests");
+app.listen(port, function () {
+    console.log(`Server ready to accept requestson http://localhost:${port}`);
 });
 
 // Setup a catch-all point.

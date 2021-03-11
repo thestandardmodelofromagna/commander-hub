@@ -2,7 +2,11 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ main ] # $default-branch
+    branches-ignore:
+      # Workflow will run on any branch to trigger unit tests.
+      - '*'
+      # But on main branch. Is already triggered at pull request.
+      - '!main'
   pull_request:
     branches: [ main ] # $default-branch
 
@@ -52,4 +56,4 @@ jobs:
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         with:
-          args: 'The project {{ EVENT_PAYLOAD.repository.full_name }} has been deployed.'
+          args: 'A $GITHUB_EVENT_NAME on $GITHUB_REF has ran $GITHUB_ACTION. The project {{ EVENT_PAYLOAD.repository.full_name }} has been deployed without errors.'

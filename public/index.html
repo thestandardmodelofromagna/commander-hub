@@ -104,11 +104,11 @@
     <script type="text/javascript">
         // When the document is ready and all objects are rendered.
         $(document).ready(function () {
-            var tooltipList = $('[data-bs-toggle="tooltip"]').map(tooltipTriggerEl => {
+            /*var tooltipList = $('[data-bs-toggle="tooltip"]').map(tooltipTriggerEl => {
                 return new bootstrap.Tooltip(tooltipTriggerEl, {
                     boundary: 'window'
                 });
-            });
+            });*/
 
             // Add a click event handler to button.
             $("#search-card-btn").on('click', function (e) {
@@ -117,7 +117,7 @@
 
                 // Build the resource to retreive.
                 let cardName = $("#search-card-txt").val();
-                let cardUrl = "http://localhost:8080/card";
+                let cardUrl = "http://localhost:8080/cards";
 
                 // Make an ajax get call to retreive info from server.
                 $.ajax({
@@ -131,6 +131,7 @@
                     $("#card-images").html("");
                     if (data === "") {
                         $("#card-images").html("Cards not found.");
+                        return;
                     }
 
                     let res = JSON.parse(data);
