@@ -20,9 +20,12 @@ app.get('/', function (req, res) {
     res.sendFile(`${__dirname}/public/index.html`);
 });
 
+//Serve static public folder
+app.use(express.static('public'));
+
 // Card endpoint moved to card route script.
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 22077;
 
 app.listen(port, function () {
     console.log(`You are in ${process.env.NODE_ENV} environment.`);

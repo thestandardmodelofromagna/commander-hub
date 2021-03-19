@@ -2,159 +2,122 @@
 <html lang="en">
 
 <head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Commander Hub</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-    <!-- Title -->
-    <title>Commander Hub</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/theme-style.css" rel="stylesheet">
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Bethany - v4.0.1
+  * Template URL: https://bootstrapmade.com/bethany-free-onepage-bootstrap-theme/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
 </head>
 
 <body>
 
-    <!-- Dark nav bar. Sticky on top. -->
-    <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
-        <div class="container-fluid">
-
-            <a class="navbar-brand" href="/index.html">
-                <!-- TODO: add site icon here. -->
-                Commander Hub
-            </a>
-
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/index.html">Home</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Contacts
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="https://github.com/thestandardmodelofromagna/commander-hub">Github Repo</a></li>
-                            <li><a class="dropdown-item" href="https://github.com/thestandardmodelofromagna/commander-hub/issues">Github Issues</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="https://discord.gg/jfKV5BfGha">Discord Server</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                    </li>
-                </ul>
-
-                <form class="d-flex">
-                    <!-- Fast search to cards on scryfall. -->
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search-card-txt" data-bs-toggle="tooltip" data-bs-placement="auto" title="Piece of name of card to search">
-                    <button class="btn btn-outline-success" type="submit" id="search-card-btn" data-bs-toggle="tooltip" data-bs-placement="auto" title="Search for any card in Scryfall database">Search</button>
-                </form>
-            </div>
-
-        </div>
-    </nav>
-
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center">
     <div class="container">
-        <div class="row">
-            <div class="col-sm-1"></div>
-
-            <div class="col-sm">
-                <h1 class="display-4">Welcome to</h1>
-                <h1 class="display-1 text-center">Commander Hub</h1>
-                <h1 class="display-6 text-end">Your commander deck store for shops!</h1>
-            </div>
-
-            <div class="col-sm-1"></div>
+      <div class="header-container d-flex align-items-center justify-content-between">
+        <div class="logo">
+          <h1 class="text-light"><a href="index.html"><span>Commander Hub</span></a></h1>
+          <!-- Uncomment below if you prefer to use an image logo -->
+          <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
         </div>
-    </div>
 
-    <div class="container">
-        <div class="row">
-            <div class="col" id="card-images"></div>
-        </div>
-    </div>
+        <nav id="navbar" class="navbar">
+          <ul>
+            <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+            <li><a class="nav-link scrollto" href="#">Link</a></li>
+            <li class="dropdown"><a href="#"><span>Contacts</span> <i class="bi bi-chevron-down"></i></a>
+              <ul>
+                <li><a href="https://github.com/thestandardmodelofromagna/commander-hub">Github repo</a></li>
+                <li><a href="https://github.com/thestandardmodelofromagna/commander-hub/issues">Github Issues</a></li>
+                <hr class="dropdown-divider">
+                <li><a href="https://discord.gg/jfKV5BfGha">Discord Server</a></li>
+              </ul>
+            </li>
+            <li>
+              <form class="d-flex">
+                <!-- Fast search to cards on scryfall. -->
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search-card-txt" data-bs-toggle="tooltip" data-bs-placement="auto" title="Piece of name of card to search">
+                <button class="btn btn-outline-success" type="submit" id="search-card-btn" data-bs-toggle="tooltip" data-bs-placement="auto" title="Search for any card in Scryfall database">Search</button>
+              </form>
+            </li>
+          </ul>
+          
+          <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav><!-- .navbar -->
 
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
-        crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+      </div><!-- End Header Container -->
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex align-items-center">
+    <div class="container text-center position-relative" data-aos="fade-in" data-aos-delay="200">
+      <h1>Welcome to Commander Hub</h1>
+      <h2>Your commander deck store for shops!</h2>
+      <div class="col">
+        <a href="#main" class="btn-get-started scrollto">Get Started</a>
+      </div>
+    </div>
+  </section><!-- End Hero -->
+
+  <main id="main">
+    <div class="col" id="card-images">
+
+    </div>
+  </main><!-- End #main -->
+
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Option 1: Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+  crossorigin="anonymous"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+  <!-- JQuery File -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
         </script>
 
-    <script type="text/javascript">
-        // Declare base_url.
-        const base_url = window.location.origin;
-
-        // When the document is ready and all objects are rendered.
-        $(document).ready(function () {
-            /*var tooltipList = $('[data-bs-toggle="tooltip"]').map(tooltipTriggerEl => {
-                return new bootstrap.Tooltip(tooltipTriggerEl, {
-                    boundary: 'window'
-                });
-            });*/
-
-            // Add a click event handler to button.
-            $("#search-card-btn").on('click', function (e) {
-                // No page refresh.
-                e.preventDefault();
-
-                // Build the resource to retreive.
-                let cardName = $("#search-card-txt").val();
-                let cardUrl = `${base_url}/cards`;
-
-                // Make an ajax get call to retreive info from server.
-                $.ajax({
-                    method: "GET",
-                    url: cardUrl,
-                    dataType: "html",
-                    data: {
-                        name: cardName
-                    }
-                }).done(function (data) { // Catch a successful return value.
-                    $("#card-images").html("");
-                    if (data === "") {
-                        $("#card-images").html("Cards not found.");
-                        return;
-                    }
-
-                    let res = JSON.parse(data);
-                    console.log(res);
-
-                    for (let i = 0; i < res.cards.length; i++) {
-                        console.log(res.cards[i].name);
-
-                        let img = $("<img>").attr("src", res.cards[i].img_uri);
-
-                        $("#card-images").append(img);
-                    }
-                }).fail(function (data) { // Catch an unsuccessful return value.
-                    console.log("Error: " + data);
-                    $("#card-images").html("Error found.");
-                }).always(function () { // Enter on any return.
-                });
-            });
-        });
-    </script>
+  <!-- UI events javascript handlers-->
+  <script src="index.js"></script>
 
 </body>
 
