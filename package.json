@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
+    "start_locally": "node -r dotenv/config index.js",
     "test": "echo \"Error: no test specified\""
   },
   "repository": {
@@ -30,5 +31,12 @@
     "Andrea Nicoletti <> ()",
     "Daniele Tentoni <daniele.tentoni.1996@gmail.com> ()"
   ],
-  "keywords": ["magic", "commander", "decklist"]
+  "keywords": [
+    "magic",
+    "commander",
+    "decklist"
+  ],
+  "devDependencies": {
+    "dotenv": "^8.2.0"
+  }
 }
