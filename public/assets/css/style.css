@@ -1,0 +1,10 @@
+/* Additional style to the global theme */
+
+#card-images {
+    color: white;
+    text-align: center;
+}
+
+.navbar #search {
+    padding-right: 10px;
+}
