@@ -10,14 +10,34 @@
 // Require api calls library.
 const express = require('express');
 const cardRoute = require('./routes/cardRoute');
+const userRoute = require('./routes/userRoute');
+
+const mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
+/*mongoose.set({
+    useNewUrlParser: true,
+    useFindAndModify: false,
+    useUnifiedTopology: true
+});
+mongoose.connect(process.env.MONGODB_URI)
+.then(() => {
+    console.log("Database connected");
+}, (error) => {
+    console.log("Database connection error ", error);
+});*/
 
 // Create base entrypoint.
 const app = express();
 app.use(express.json());
 cardRoute(app);
+userRoute(app);
 
 app.get('/', function (req, res) {
     res.sendFile(`${__dirname}/public/index.html`);
+});
+
+app.get('/login', function (req, res) {
+    res.sendFile(`${__dirname}/public/login.html`);
 });
 
 // Card endpoint moved to card route script.

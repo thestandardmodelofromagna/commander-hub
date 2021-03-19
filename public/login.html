@@ -74,23 +74,21 @@
     </nav>
 
     <div class="container">
-        <div class="row">
-            <div class="col-sm-1"></div>
-
-            <div class="col-sm">
-                <h1 class="display-4">Welcome to</h1>
-                <h1 class="display-1 text-center">Commander Hub</h1>
-                <h1 class="display-6 text-end">Your commander deck store for shops!</h1>
+      <div class="row">
+        <div class="col-sm">
+          <h4 class="display-4">Login page</h4>
+        </div>
+        <div class="col-sm">
+          <form>
+            <div class="mb-3">
+              <label for="usernameText" class="form-label">Username</label>
+              <input type="text" class="form-control" id="usernameText" aria-describedby="usernameHelp">
+              <div id="usernameHelp" class="form-text">We'll never share your email with anyone else.</div>
             </div>
-
-            <div class="col-sm-1"></div>
+            <button type="submit" id="login-button" class="btn btn-dark">Submit</button>
+          </form>
         </div>
-    </div>
-
-    <div class="container">
-        <div class="row">
-            <div class="col" id="card-images"></div>
-        </div>
+      </div>
     </div>
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
@@ -107,20 +105,14 @@
 
         // When the document is ready and all objects are rendered.
         $(document).ready(function () {
-            /*var tooltipList = $('[data-bs-toggle="tooltip"]').map(tooltipTriggerEl => {
-                return new bootstrap.Tooltip(tooltipTriggerEl, {
-                    boundary: 'window'
-                });
-            });*/
 
             // Add a click event handler to button.
-            $("#search-card-btn").on('click', function (e) {
+            $("#login-button").on('click', function (e) {
                 // No page refresh.
                 e.preventDefault();
 
                 // Build the resource to retreive.
                 let cardName = $("#search-card-txt").val();
-                let cardUrl = `${base_url}/cards`;
 
                 // Make an ajax get call to retreive info from server.
                 $.ajax({
