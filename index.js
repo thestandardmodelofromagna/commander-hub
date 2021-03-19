@@ -9,26 +9,27 @@
 
 // Require api calls library.
 const express = require('express');
+const { urlencoded, json } = require('body-parser')
 const cardRoute = require('./routes/cardRoute');
 const userRoute = require('./routes/userRoute');
 
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-/*mongoose.set({
+mongoose.connect(process.env.MONGODB_URI, {
+    useUnifiedTopology: true,
     useNewUrlParser: true,
-    useFindAndModify: false,
-    useUnifiedTopology: true
-});
-mongoose.connect(process.env.MONGODB_URI)
-.then(() => {
-    console.log("Database connected");
-}, (error) => {
-    console.log("Database connection error ", error);
-});*/
+    useFindAndModify: false
+})
+    .then(() => {
+        console.log("Database connected");
+    }, (error) => {
+        console.log("Database connection error ", error);
+    });
 
 // Create base entrypoint.
 const app = express();
-app.use(express.json());
+app.use(json());
+app.use(urlencoded({ extended: false }));
 cardRoute(app);
 userRoute(app);
 

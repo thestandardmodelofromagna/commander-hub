@@ -9,15 +9,16 @@
 
 const { getUser, getUsers, addUser } = require('../controllers/userController');
 module.exports = app => {
-  app.route('/users').get((req, res) => {
-    getUsers(req, res);
-  }),
-  app.route('/user/:id').get((req, res) => {
-    getUser(req.params.id, res);
-  }),
-  app.route('/user').post((req, res) => {
-    addUser(req.body.name, res);
-  })
-  // app.route('/card/:id').put(cardController.putCard);
-  // app.route('/card/:id').delete(cardController.deleteCard);
+    app.route('/users').get((req, res) => {
+        getUsers(req, res);
+    }),
+        app.route('/user/:id').get((req, res) => {
+            getUser(req.params.id, res);
+        }),
+        app.route('/user').post((req, res) => {
+            console.log("Post user name: ", req.body);
+            addUser(req.body.username, res);
+        })
+    // app.route('/card/:id').put(cardController.putCard);
+    // app.route('/card/:id').delete(cardController.deleteCard);
 }

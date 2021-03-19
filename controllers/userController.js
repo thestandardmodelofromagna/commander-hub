@@ -7,12 +7,13 @@
  * @since 1.0.0
  */
 
-const userModel = require('../models/user');
+const UserModel = require('../models/user');
 
 const addUser = (name, res) => {
-  const newUser = new userModel({
+  const newUser = new UserModel({
     name
   });
+  console.log("Generate newUser: ", newUser);
   newUser.save((error) => {
     if (error) {
       res.status(500).send(error);
@@ -23,7 +24,7 @@ const addUser = (name, res) => {
 };
 
 const getUser = (id, res) => {
-  userModel.findById(id, (error, data) => {
+  UserModel.findById(id, (error, data) => {
     if (error) {
       res.status(500).send(error);
     } else {
@@ -36,7 +37,7 @@ const getUser = (id, res) => {
  * Return all users in database.
  */
 const getUsers = (req, res) => {
-  userModel.find((error, data) => {
+  UserModel.find((error, data) => {
     if (error) {
       res.status(500).send(error);
     } else {

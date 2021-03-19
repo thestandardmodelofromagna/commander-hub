@@ -49,12 +49,17 @@
                             Contacts
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="https://github.com/thestandardmodelofromagna/commander-hub" target="_blank">Github Repo</a></li>
-                            <li><a class="dropdown-item" href="https://github.com/thestandardmodelofromagna/commander-hub/issues" target="_blank">Github Issues</a></li>
+                            <li><a class="dropdown-item"
+                                    href="https://github.com/thestandardmodelofromagna/commander-hub"
+                                    target="_blank">Github Repo</a></li>
+                            <li><a class="dropdown-item"
+                                    href="https://github.com/thestandardmodelofromagna/commander-hub/issues"
+                                    target="_blank">Github Issues</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="https://discord.gg/jfKV5BfGha" target="_blank">Discord Server</a></li>
+                            <li><a class="dropdown-item" href="https://discord.gg/jfKV5BfGha" target="_blank">Discord
+                                    Server</a></li>
                         </ul>
                     </li>
 
@@ -65,8 +70,11 @@
 
                 <form class="d-flex">
                     <!-- Fast search to cards on scryfall. -->
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search-card-txt" data-bs-toggle="tooltip" data-bs-placement="auto" title="Piece of name of card to search">
-                    <button class="btn btn-outline-success" type="submit" id="search-card-btn" data-bs-toggle="tooltip" data-bs-placement="auto" title="Search for any card in Scryfall database">Search</button>
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+                        id="search-card-txt" data-bs-toggle="tooltip" data-bs-placement="auto"
+                        title="Piece of name of card to search">
+                    <button class="btn btn-outline-success" type="submit" id="search-card-btn" data-bs-toggle="tooltip"
+                        data-bs-placement="auto" title="Search for any card in Scryfall database">Search</button>
                 </form>
             </div>
 
@@ -74,21 +82,38 @@
     </nav>
 
     <div class="container">
-      <div class="row">
-        <div class="col-sm">
-          <h4 class="display-4">Login page</h4>
-        </div>
-        <div class="col-sm">
-          <form>
-            <div class="mb-3">
-              <label for="usernameText" class="form-label">Username</label>
-              <input type="text" class="form-control" id="usernameText" aria-describedby="usernameHelp">
-              <div id="usernameHelp" class="form-text">We'll never share your email with anyone else.</div>
+        <div class="row">
+            <div class="col-sm">
+                <h4 class="display-4">Login page</h4>
             </div>
-            <button type="submit" id="login-button" class="btn btn-dark">Submit</button>
-          </form>
+            <div class="col-sm">
+                <form>
+                    <div class="mb-3">
+                        <label for="usernameText" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="login-username-text"
+                            aria-describedby="usernameHelp">
+                        <div id="usernameHelp" class="form-text">We'll never share your email with anyone else.</div>
+                    </div>
+                    <button type="submit" id="login-button" class="btn btn-dark">Submit</button>
+                </form>
+            </div>
         </div>
-      </div>
+        <div class="row">
+            <div class="col-sm">
+                <h4 class="display-4">Register page</h4>
+            </div>
+            <div class="col-sm">
+                <form>
+                    <div class="mb-3">
+                        <label for="usernameText" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="register-username-text"
+                            aria-describedby="usernameHelp">
+                        <div id="usernameHelp" class="form-text">We'll never share your email with anyone else.</div>
+                    </div>
+                    <button type="submit" id="register-button" class="btn btn-dark">Register</button>
+                </form>
+            </div>
+        </div>
     </div>
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
@@ -112,36 +137,48 @@
                 e.preventDefault();
 
                 // Build the resource to retreive.
-                let cardName = $("#search-card-txt").val();
+                let username = $("#login-username-text").val();
+                let loginUrl = `${base_url}/users`;
 
                 // Make an ajax get call to retreive info from server.
                 $.ajax({
                     method: "GET",
-                    url: cardUrl,
+                    url: loginUrl,
                     dataType: "html",
                     data: {
-                        name: cardName
+                        name: username
                     }
                 }).done(function (data) { // Catch a successful return value.
-                    $("#card-images").html("");
-                    if (data === "") {
-                        $("#card-images").html("Cards not found.");
-                        return;
-                    }
-
                     let res = JSON.parse(data);
                     console.log(res);
-
-                    for (let i = 0; i < res.cards.length; i++) {
-                        console.log(res.cards[i].name);
-
-                        let img = $("<img>").attr("src", res.cards[i].img_uri);
-
-                        $("#card-images").append(img);
-                    }
                 }).fail(function (data) { // Catch an unsuccessful return value.
                     console.log("Error: " + data);
-                    $("#card-images").html("Error found.");
+                }).always(function () { // Enter on any return.
+                });
+            });
+
+            $("#register-button").on('click', function (e) {
+                // No page refresh.
+                e.preventDefault();
+
+                // Build the resource to retreive.
+                let username = $("#register-username-text").val();
+                console.log("Username ", username);
+                let loginUrl = `${base_url}/user`;
+
+                // Make an ajax get call to retreive info from server.
+                $.ajax({
+                    method: "POST",
+                    url: loginUrl,
+                    dataType: "html",
+                    data: {
+                        username
+                    }
+                }).done(function (data) { // Catch a successful return value.
+                    let res = JSON.parse(data);
+                    console.log(res);
+                }).fail(function (data) { // Catch an unsuccessful return value.
+                    console.log("Error: " + data);
                 }).always(function () { // Enter on any return.
                 });
             });
