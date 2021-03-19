@@ -13,7 +13,6 @@ const addUser = (name, res) => {
   const newUser = new UserModel({
     name
   });
-  console.log("Generate newUser: ", newUser);
   newUser.save((error) => {
     if (error) {
       res.status(500).send(error);

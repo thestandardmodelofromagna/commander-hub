@@ -16,4 +16,8 @@ You need all both dependencies installed to run locally the project.
 
 Check you have installed `python` on your system. If you have `python3` installed and not python, spawn wouldn't found binaries to run python scripts.
 
+## Run project
+
+Require the access to MongoDB instance on discord or configure your own on your machine.
+
 Use `node index.js` or `npm run start` to run server.

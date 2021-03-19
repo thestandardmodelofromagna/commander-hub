@@ -16,7 +16,6 @@ module.exports = app => {
             getUser(req.params.id, res);
         }),
         app.route('/user').post((req, res) => {
-            console.log("Post user name: ", req.body);
             addUser(req.body.username, res);
         })
     // app.route('/card/:id').put(cardController.putCard);
