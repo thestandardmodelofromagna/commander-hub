@@ -15,7 +15,7 @@ const addUser = (name, res) => {
   });
   newUser.save((error) => {
     if (error) {
-      res.status(500).send(error);
+      res.status(500).json(error);
     } else {
       res.status(200);
     }
@@ -25,9 +25,9 @@ const addUser = (name, res) => {
 const getUser = (id, res) => {
   UserModel.findById(id, (error, data) => {
     if (error) {
-      res.status(500).send(error);
+      res.status(500).json(error);
     } else {
-      res.status(200).send(data);
+      res.status(200).json(data);
     }
   });
 };
@@ -38,7 +38,7 @@ const getUser = (id, res) => {
 const getUsers = (req, res) => {
   UserModel.find((error, data) => {
     if (error) {
-      res.status(500).send(error);
+      res.status(500).json(error);
     } else {
       res.status(200).json(data);
     }
