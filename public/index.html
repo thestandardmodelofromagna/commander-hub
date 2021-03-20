@@ -22,7 +22,7 @@
     <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
         <div class="container-fluid">
 
-            <a class="navbar-brand" href="/">
+            <a class="navbar-brand" href="/index.html">
                 <!-- TODO: add site icon here. -->
                 Commander Hub
             </a>
@@ -36,25 +36,46 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                        <a class="nav-link active" aria-current="page" href="/index.html">Home</a>
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="/login">Login</a>
+                    <!-- Account management. -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Account
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><span class="dropdown-item disabled" aria-disabled="true">Unauthenticated</span></li>
+                            <li><a class="dropdown-item" href="/account/login.html">Login</a></li>
+                            <li><a class="dropdown-item" href="/account/register.html">Register</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><span class="dropdown-item disabled" aria-disabled="true">Authenticated</span></li>
+                            <li><a class="dropdown-item" href="/account/user.html">User</a></li>
+                            <li><a class="dropdown-item" href="/account/logout.html">Logout</a></li>
+                        </ul>
                     </li>
 
+                    <!-- Contacts link. -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             Contacts
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="https://github.com/thestandardmodelofromagna/commander-hub" target="_blank">Github Repo</a></li>
-                            <li><a class="dropdown-item" href="https://github.com/thestandardmodelofromagna/commander-hub/issues" target="_blank">Github Issues</a></li>
+                            <li><a class="dropdown-item"
+                                    href="https://github.com/thestandardmodelofromagna/commander-hub"
+                                    target="_blank">Github Repo</a></li>
+                            <li><a class="dropdown-item"
+                                    href="https://github.com/thestandardmodelofromagna/commander-hub/issues"
+                                    target="_blank">Github Issues</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="https://discord.gg/jfKV5BfGha" target="_blank">Discord Server</a></li>
+                            <li><a class="dropdown-item" href="https://discord.gg/jfKV5BfGha" target="_blank">Discord
+                                    Server</a></li>
                         </ul>
                     </li>
 
@@ -63,10 +84,13 @@
                     </li>
                 </ul>
 
+                <!-- Fast search to cards on scryfall. -->
                 <form class="d-flex">
-                    <!-- Fast search to cards on scryfall. -->
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search-card-txt" data-bs-toggle="tooltip" data-bs-placement="auto" title="Piece of name of card to search">
-                    <button class="btn btn-outline-success" type="submit" id="search-card-btn" data-bs-toggle="tooltip" data-bs-placement="auto" title="Search for any card in Scryfall database">Search</button>
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+                        id="search-card-txt" data-bs-toggle="tooltip" data-bs-placement="auto"
+                        title="Piece of name of card to search">
+                    <button class="btn btn-outline-success" type="submit" id="search-card-btn" data-bs-toggle="tooltip"
+                        data-bs-placement="auto" title="Search for any card in Scryfall database">Search</button>
                 </form>
             </div>
 
