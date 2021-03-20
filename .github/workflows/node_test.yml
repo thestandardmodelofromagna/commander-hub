@@ -5,7 +5,7 @@ on:
     branches-ignore:
       # Workflow will run on any branch to trigger unit tests.
       - '*'
-      # But on main branch. Is already triggered at pull request.
+      # But not on main branch. Is already triggered at pull request.
       - '!main'
   pull_request:
     branches: [ main ] # $default-branch
@@ -54,6 +54,6 @@ jobs:
       - name: Discord notification
         uses: Ilshidur/action-discord@master
         env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_UPDATE_WEBHOOK }}
         with:
           args: 'A {{ GITHUB_EVENT_NAME }} on {{ GITHUB_REF }} has ran {{ GITHUB_ACTION }}. The project {{ EVENT_PAYLOAD.repository.full_name }} has been deployed without errors.'

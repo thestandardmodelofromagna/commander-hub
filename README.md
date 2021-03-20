@@ -18,6 +18,14 @@ Check you have installed `python` on your system. If you have `python3` installe
 
 ## Run project
 
-Require the access to MongoDB instance on discord or configure your own on your machine.
+### Locally
+
+Require the access to MongoDB instance on discord or configure your own on your machine. Set accordly the environment variable `MONGODB_URI="put your url here"`.
+
+To start locally the project, run `npm run start_locally`.
+
+### Production
+
+Production environment is set to Heroku, the deploy is done automatically when a pull_request is merged to main branch.
 
 Use `node index.js` or `npm run start` to run server.
