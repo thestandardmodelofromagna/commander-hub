@@ -12,7 +12,6 @@ const express = require('express');
 const { urlencoded, json } = require('body-parser');
 const path = require('path');
 const cardRoute = require('./routes/cardRoute');
-const userRoute = require('./routes/userRoute');
 
 /*
  * Helmet can help protect your app from some well-known web vulnerabilities by setting HTTP headers appropriately.
@@ -39,7 +38,9 @@ app.use(json());
 app.use(urlencoded({ extended: false }));
 // app.use(helmet());
 cardRoute(app);
-userRoute(app);
+
+const userApi = require('./routes/user.routes');
+app.use("/api", userApi);
 
 // Account routes will be available at /account/...
 app.use(express.static(path.join(__dirname, 'public')));
