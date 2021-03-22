@@ -42,9 +42,6 @@ cardRoute(app);
 const userApi = require('./routes/user.routes');
 app.use("/api", userApi);
 
-// Account routes will be available at /account/...
-app.use(express.static(path.join(__dirname, 'public')));
-
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
@@ -52,6 +49,9 @@ app.get('/', function (req, res) {
 app.get('/login', function (req, res) {
   res.sendFile(path.join(__dirname, "public", "login.html"));
 });
+
+// Account routes will be available at /account/...
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Card endpoint moved to card route script.
 
@@ -70,12 +70,13 @@ app.get('*', (req, res) => res.status(404).send({
 // Error handler.
 app.use(function (err, req, res, next) {
   console.error("Last error handler.");
-  console.error(err.message);
+  console.error(err.description);
 
-  if (!err.statusCode)
+  if (!err.statusCode) {
     err.statusCode = 500;
+  }
 
-  res.status(err.statusCode).send(err.message);
+  res.status(err.statusCode).send(err);
 });
 
 module.exports = app;
