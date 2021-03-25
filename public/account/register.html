@@ -12,7 +12,7 @@
     integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
   <!-- Title -->
-  <title>Commander Hub</title>
+  <title>Commander Hub - Register</title>
 
 </head>
 
@@ -22,7 +22,7 @@
   <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
     <div class="container-fluid">
 
-      <a class="navbar-brand" href="/index.html">
+      <a class="navbar-brand" href="/">
         <!-- TODO: add site icon here. -->
         Commander Hub
       </a>
@@ -35,7 +35,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/index.html">Home</a>
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
           </li>
 
           <!-- Account management. -->
@@ -95,21 +95,31 @@
 
   <div class="container">
     <div class="row">
-      <div class="col-sm-1"></div>
-
       <div class="col-sm">
-        <h1 class="display-4">Welcome to</h1>
-        <h1 class="display-1 text-center">Commander Hub</h1>
-        <h1 class="display-6 text-end">Your commander deck store for shops!</h1>
+        <h4 class="display-4">Register page</h4>
+        <p>With registration, you'll have access to all functions of this application:</p>
       </div>
-
-      <div class="col-sm-1"></div>
-    </div>
-  </div>
-
-  <div class="container">
-    <div class="row">
-      <div class="col" id="card-images"></div>
+      <div class="col-sm">
+        <form>
+          <div class="mb-3">
+            <label for="username-text" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username-text" aria-describedby="username-help">
+            <div id="username-help" class="form-text">We'll never share your email with anyone else.</div>
+          </div>
+          <div class="mb-3">
+            <label for="password-text" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password-text" aria-describedby="password-help">
+            <div id="password-help" class="form-text">We'll never share your password with anyone else.</div>
+          </div>
+          <div class="mb-3">
+            <label for="password-confirm-text" class="form-label">Confirm password</label>
+            <input type="password" class="form-control" id="password-confirm-text"
+              aria-describedby="password-confirm-help">
+            <div id="password-confirm-help" class="form-text">Be sure that two passwords matches.</div>
+          </div>
+          <button type="submit" id="register-button" class="btn btn-dark">Register</button>
+        </form>
+      </div>
     </div>
   </div>
 
@@ -125,52 +135,49 @@
     // Declare base_url.
     const base_url = window.location.origin;
 
+    // Useless function.
+    const passwordCheck = (pwd1, pwd2) => {
+      if (typeof pwd1 !== "string" || typeof pwd2 !== "string") {
+        return false;
+      }
+
+      return pwd1 === pwd2;
+    }
+
     // When the document is ready and all objects are rendered.
     $(document).ready(function () {
-      /*var tooltipList = $('[data-bs-toggle="tooltip"]').map(tooltipTriggerEl => {
-          return new bootstrap.Tooltip(tooltipTriggerEl, {
-              boundary: 'window'
-          });
-      });*/
-
-      // Add a click event handler to button.
-      $("#search-card-btn").on('click', function (e) {
+      $("#register-button").on('click', function (e) {
         // No page refresh.
         e.preventDefault();
 
+        let pwd1 = $("#password-text").val();
+        let pwd2 = $("#confirm-password-text").val();
+        if (passwordCheck(pwd1, pwd2)) {
+          alert("Passwords doesn't match.");
+          return;
+        }
+
         // Build the resource to retreive.
-        let cardName = $("#search-card-txt").val();
-        let cardUrl = `${base_url}/cards`;
+        let username = $("#username-text").val();
+        let loginUrl = `${base_url}/api/user`;
 
         // Make an ajax get call to retreive info from server.
         $.ajax({
-          method: "GET",
-          url: cardUrl,
+          method: "POST",
+          url: loginUrl,
           dataType: "html",
           data: {
-            name: cardName
+            username
           }
         }).done(function (data) { // Catch a successful return value.
-          $("#card-images").html("");
-          if (data === "") {
-            $("#card-images").html("Cards not found.");
-            return;
-          }
-
           let res = JSON.parse(data);
           console.log(res);
-
-          for (let i = 0; i < res.cards.length; i++) {
-            console.log(res.cards[i].name);
-
-            let img = $("<img>").attr("src", res.cards[i].img_uri);
-
-            $("#card-images").append(img);
-          }
+          alert("Registered");
         }).fail(function (data) { // Catch an unsuccessful return value.
-          console.log("Error: " + data);
-          $("#card-images").html("Error found.");
+          console.log("Error: ", data);
+          alert("Not Registered");
         }).always(function () { // Enter on any return.
+          console.log("On always");
         });
       });
     });

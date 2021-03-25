@@ -1,14 +1,26 @@
 name: Node.js CI
 
 on:
-  push:
+
+  push: # Workflow will run on push events with following addictional rules
+
     branches-ignore:
       # Workflow will run on any branch to trigger unit tests.
       - '*'
-      # But on main branch. Is already triggered at pull request.
+      # But not on main branch. Is already triggered at pull request.
       - '!main'
-  pull_request:
-    branches: [ main ] # $default-branch
+    
+    paths-ignore:
+      # The workflow will not run if **only** modified files are those
+      - '.github/**'
+
+  pull_request: # Workflow will run on pr events with following addictional rules
+
+    branches-ignore:
+      # Workflow will run on any branch to trigger unit tests.
+      - '*'
+      # But not on main branch. Is already triggered at pull request.
+      - '!main'
 
 jobs:
   build:
@@ -52,8 +64,10 @@ jobs:
 
     steps:
       - name: Discord notification
-        uses: Ilshidur/action-discord@master
-        env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        uses: appleboy/discord-action@master
         with:
-          args: 'A {{ GITHUB_EVENT_NAME }} on {{ GITHUB_REF }} has ran {{ GITHUB_ACTION }}. The project {{ EVENT_PAYLOAD.repository.full_name }} has been deployed without errors.'
+          webhook_id: ${{ secrets.DISCORD_WEBHOOK_ID }}
+          webhook_token: ${{ secrets.DISCORD_WEBHOOK_TOKEN }}
+          color: "#48f442"
+          username: "GitHub Bot"
+          message: "A {{ github.event_name }} on {{ github.ref }} has ran {{ github.action }}. The project {{ EVENT_PAYLOAD.repository.full_name }} passed all tests."

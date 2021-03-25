@@ -22,7 +22,7 @@
   <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
     <div class="container-fluid">
 
-      <a class="navbar-brand" href="/index.html">
+      <a class="navbar-brand" href="/">
         <!-- TODO: add site icon here. -->
         Commander Hub
       </a>
@@ -35,7 +35,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/index.html">Home</a>
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
           </li>
 
           <!-- Account management. -->
@@ -49,7 +49,7 @@
               <li><a class="dropdown-item" href="/account/login.html">Login</a></li>
               <li><a class="dropdown-item" href="/account/register.html">Register</a></li>
               <li>
-                <hr class="dropdown-divider">
+                  <hr class="dropdown-divider">
               </li>
               <li><span class="dropdown-item disabled" aria-disabled="true">Authenticated</span></li>
               <li><a class="dropdown-item" href="/account/user.html">User</a></li>
@@ -95,21 +95,19 @@
 
   <div class="container">
     <div class="row">
-      <div class="col-sm-1"></div>
-
       <div class="col-sm">
-        <h1 class="display-4">Welcome to</h1>
-        <h1 class="display-1 text-center">Commander Hub</h1>
-        <h1 class="display-6 text-end">Your commander deck store for shops!</h1>
+        <h4 class="display-4">Login page</h4>
       </div>
-
-      <div class="col-sm-1"></div>
-    </div>
-  </div>
-
-  <div class="container">
-    <div class="row">
-      <div class="col" id="card-images"></div>
+      <div class="col-sm">
+        <form>
+          <div class="mb-3">
+            <label for="usernameText" class="form-label">Username</label>
+            <input type="text" class="form-control" id="login-username-text" aria-describedby="usernameHelp">
+            <div id="usernameHelp" class="form-text">We'll never share your email with anyone else.</div>
+          </div>
+          <button type="submit" id="login-button" class="btn btn-dark">Submit</button>
+        </form>
+      </div>
     </div>
   </div>
 
@@ -127,49 +125,29 @@
 
     // When the document is ready and all objects are rendered.
     $(document).ready(function () {
-      /*var tooltipList = $('[data-bs-toggle="tooltip"]').map(tooltipTriggerEl => {
-          return new bootstrap.Tooltip(tooltipTriggerEl, {
-              boundary: 'window'
-          });
-      });*/
 
       // Add a click event handler to button.
-      $("#search-card-btn").on('click', function (e) {
+      $("#login-button").on('click', function (e) {
         // No page refresh.
         e.preventDefault();
 
         // Build the resource to retreive.
-        let cardName = $("#search-card-txt").val();
-        let cardUrl = `${base_url}/cards`;
+        let username = $("#login-username-text").val();
+        let loginUrl = `${base_url}/api/users`;
 
         // Make an ajax get call to retreive info from server.
         $.ajax({
           method: "GET",
-          url: cardUrl,
+          url: loginUrl,
           dataType: "html",
           data: {
-            name: cardName
+            name: username
           }
         }).done(function (data) { // Catch a successful return value.
-          $("#card-images").html("");
-          if (data === "") {
-            $("#card-images").html("Cards not found.");
-            return;
-          }
-
           let res = JSON.parse(data);
           console.log(res);
-
-          for (let i = 0; i < res.cards.length; i++) {
-            console.log(res.cards[i].name);
-
-            let img = $("<img>").attr("src", res.cards[i].img_uri);
-
-            $("#card-images").append(img);
-          }
         }).fail(function (data) { // Catch an unsuccessful return value.
           console.log("Error: " + data);
-          $("#card-images").html("Error found.");
         }).always(function () { // Enter on any return.
         });
       });
